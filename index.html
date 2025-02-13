@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacScriptZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #121212, #1c1c1c);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+            padding: 50px;
+        }
+
+        .left-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 40%;
+        }
+        .title {
+            font-size: 48px;
+            color: #ff4444; /* Red title */
+            font-weight: 700;
+        }
+        .label {
+            font-size: 18px;
+            color: #dddddd;
+        }
+        .download-btn {
+            background: #ff4444; /* Red button */
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 68, 68, 0.4); /* Red shadow */
+            text-align: center;
+            width: max-content;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px); /* Original hover effect */
+            box-shadow: 0 8px 20px rgba(255, 68, 68, 0.6); /* Red shadow */
+        }
+
+        .right-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+        .main-image {
+            width: 700px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(255, 68, 68, 0.2); /* Red shadow */
+        }
+
+        .download-frame {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background-color: #2b2b2b;
+            color: white;
+            border-radius: 12px;
+            width: 40%;
+            padding: 40px;
+            box-shadow: 0 5px 30px rgba(255, 68, 68, 0.2); /* Red shadow */
+            text-align: center;
+            animation: popUp 0.7s forwards;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .download-frame h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff4444; /* Red heading */
+        }
+
+        .download-frame p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .download-now-btn {
+            background: #ff4444; /* Red button */
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 68, 68, 0.4); /* Red shadow */
+        }
+        .download-now-btn:hover {
+            transform: translateY(-3px); /* Original hover effect */
+            box-shadow: 0 8px 20px rgba(255, 68, 68, 0.6); /* Red shadow */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+        }
+        .close-btn:hover {
+            color: #ff4444; /* Red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="left-container">
+        <h1 class="title">Your best exploiting experience with MacScriptZ</h1>
+        <p class="label">The best of all</p>
+        <p class="label">Level 8 Executor</p>
+        <button class="download-btn" id="downloadBtn">Download</button>
+    </div>
+    <div class="right-container">
+        <img src="https://cdn.discordapp.com/attachments/1335608925428518992/1339598437385240736/Screenshot_2025-02-13_at_7.05.47_PM.png?ex=67af4dc4&is=67adfc44&hm=4d1e4beb4965d674a917237067230407b4579a65c71b0590adbddafa514ac4ad&" alt="MacScriptZ" class="main-image" id="mainImage">
+    </div>
+
+    <div class="download-frame" id="downloadFrame">
+        <h2>MacScriptZ Download</h2>
+        <p>Download the Executor</p>
+        <button class="download-now-btn">Download Now</button>
+        <span class="close-btn" id="closeBtn">×</span>
+    </div>
+
+    <script>
+        const image = document.getElementById('mainImage');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const downloadFrame = document.getElementById('downloadFrame');
+        const closeBtn = document.getElementById('closeBtn');
+
+        image.addEventListener('mousemove', (e) => {
+            const rect = image.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            const rotateX = y * 20;
+            const rotateY = x * -20;
+            image.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+        image.addEventListener('mouseleave', () => {
+            image.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            downloadFrame.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            downloadFrame.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
